@@ -51,12 +51,13 @@ namespace tp1
         public string altaSocio(string nombre, string dni)
         {
             Socio socio = buscarSocio(dni);
+            string resultado = "NO_SE_PUDO_REGISTRAR";
             if (socio == null) {
                 Socio nuevoSocio = new Socio(++idUltimoSocio, nombre, dni);
                 socios.Add(nuevoSocio);
-                return "INSCRIPCION_EXITOSA";
+                resultado = "INSCRIPCION_EXITOSA";
             }
-            return "NO_SE_PUDO_REGISTRAR";
+            return resultado;
         }
 
         public bool altaActividad(string nombre, int cupoMax, int cupoDisponible, double precio)
@@ -74,29 +75,31 @@ namespace tp1
         public string inscribirActividad(string nomActividad, string dni)
         {
             Socio socio = buscarSocio(dni);
-            if (socio == null) {
-                return "SOCIO_INEXISTENTE";
-            }
-
             Actividad actividad = buscarActividad(nomActividad);
-            if (actividad == null) {
-                return "ACTIVIDAD_INEXISTENTE";
+            string resultado;
+
+            if (socio == null) {
+                resultado = "SOCIO_INEXISTENTE";
             }
-
-            if (actividad.CupoDisponible == 0) {
-                return "NO_HAY_CUPO_DISPONIBLE";
+            else if (actividad == null) {
+                resultado = "ACTIVIDAD_INEXISTENTE";
             }
-
-            bool seAgregoaActividad = socio.agregarActividad(actividad);
-
-            if (seAgregoaActividad) {
-                actividad.agregarInscripto(socio);
-                actividad.restarCupo();
-                return "INSCRIPCION_EXITOSA";
+            else if (actividad.CupoDisponible == 0) {
+                resultado = "NO_HAY_CUPO_DISPONIBLE";
             }
             else {
-                return "TOPE_DE_ACTIVIDADES_ALCANZADO";
+                bool seAgregoaActividad = socio.agregarActividad(actividad);
+                if (seAgregoaActividad) {
+                    actividad.agregarInscripto(socio);
+                    actividad.restarCupo();
+                    resultado = "INSCRIPCION_EXITOSA";
+                }
+                else {
+                    resultado = "TOPE_DE_ACTIVIDADES_ALCANZADO";
+                }
             }
+
+            return resultado;
         }
 
         public void listarSocios()
