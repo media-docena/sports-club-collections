@@ -6,17 +6,19 @@ namespace tp1
 {
     internal class ClubDeportivo
     {
+        private string razonSocial;
         private List<Socio> socios;
         private List<Actividad> actividades;
         private int idUltimoSocio;
         private int idUltimaActividad;
 
-        public ClubDeportivo() {
+        public ClubDeportivo(string razonSocial) {
+            this.razonSocial = razonSocial;
             this.socios = new List<Socio>();
             this.actividades = new List<Actividad>();
         }
 
-        public Socio buscarSocio(string dni)
+        private Socio buscarSocio(string dni)
         {
             Socio socioaBuscar = null;
             int i = 0;
@@ -31,7 +33,7 @@ namespace tp1
             return socioaBuscar;
         }
 
-        public Actividad buscarActividad(string nombre)
+        private Actividad buscarActividad(string nombre)
         {
             Actividad actividadaBuscar = null;
             int i = 0;
@@ -94,6 +96,19 @@ namespace tp1
             }
             else {
                 return "TOPE_DE_ACTIVIDADES_ALCANZADO";
+            }
+        }
+
+        public void listarSocios()
+        {
+            foreach(var socio in socios) {
+                Console.WriteLine(socio);
+            }
+        }
+        public void listarActividades()
+        {
+            foreach(var actividad in actividades) {
+                Console.WriteLine(actividad);
             }
         }
 

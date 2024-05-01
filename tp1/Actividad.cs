@@ -35,7 +35,6 @@ namespace tp1
                 }
             }
         }
-        internal List<Socio> Inscriptos { get => inscriptos; }
 
         public void restarCupo()
         {
@@ -54,7 +53,7 @@ namespace tp1
 
         public override string ToString()
         {
-            return $"id: {id} Nombre: {nombre} Cupo max: {cupoMax} Cupo disponible: {cupoDisponible} Precio: {precio} Inscriptos: {Inscriptos}";
+            return $"id: {id} Nombre: {nombre} Cupo max: {cupoMax} Cupo disponible: {cupoDisponible} Precio: {precio}.";
         }
     }
 }
