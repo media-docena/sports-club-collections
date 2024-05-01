@@ -21,7 +21,6 @@ namespace tp1
         }
 
         public string DNI { get => dni; }
-        internal List<Actividad> ActividadesDepor { get => actividadesDepor; }
 
         public bool agregarActividad(Actividad actividad)
         {
@@ -35,7 +34,7 @@ namespace tp1
 
         public override string ToString()
         {
-            return $"Id: {id} Nombre: {nombre} DNI: {dni} Actividades: {actividadesDepor}";
+            return $"Id: {id} Nombre: {nombre} DNI: {dni}.";
         }
     }
 }
